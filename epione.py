@@ -1,11 +1,22 @@
 import requests
 import datetime
 import sqlite3
+import http.server import HTTPServer, BaseHTTPRequestHandler
+
+class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
+	def do_GET(self):
+		self.send_response(200)
+		self.end_headers()
+		self.wfile.write(b'Hi Ashleyeet and Julyeeta!')
+
+httpd = HTTPServer(('localhost', 8000), SimpleHTTPRequestHandler)
+httpd.serve_forever()
+	
+epione_db = '__HOME__/epione.db'
 
 
-dhke_db = '__HOME__/epione.db'
 
-delim = "\n"
+
 #MAX_READINGS = 5 # After 14 lines of information, no more lines will be displayed on the screen (overflow)
 
 
