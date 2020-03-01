@@ -11,15 +11,16 @@ body {
 	background-size: 100%;
 }
 
-/* Add a black background color to the top navigation */
+/* Add a SectionTitle background color to the top navigation */
 .topnav {
-	background-color: #333; 
+	background-color: #179B92; 
 	overflow: hidden;
 }
 
 /* Style the links inside the navigation bar */
 .topnav a {
 	float: left;
+	font-family: "Quicksand", sans-serif;
 	color: #f2f2f2;
 	text-align: center;
 	padding: 14px 16px;
@@ -29,7 +30,7 @@ body {
 
 /* Change the color of links on hover */
 .topnav a:hover {
-	background-color: #ddd;
+	background-color: #D5FAF8;
 	color: black;
 }
 
@@ -60,7 +61,6 @@ body {
 	padding: 10px; /* space around pic and name */
 	font-family: "Quicksand", sans-serif;
 	text-align: center;
-	float: left;
 	background-color: white;
 	margin: 15px; /* space around each div. 
 				so the space between images will be twice the margin*/
@@ -72,13 +72,23 @@ body {
 	height: 230px; /* = width - 2 * padding */
 }
 
+.OrigamiOverview {
+	display:flex;
+	justify-content: space-between;
+	align-items: flex-start;
+}
 .OrigamiSection {
 	background-color: #D5FAF8;
 	float: left;
 	margin: 20px;
 	box-shadow: 3px 3px 10px rgba(0,0,0,0.50);
 	max-width: 600px;
-
+	display:flex;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+	flex-direction:column;
+	align-items: center;
+	flex-grow:1;
 }
 
 .SectionTitle {
