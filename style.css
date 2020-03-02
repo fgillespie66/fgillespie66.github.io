@@ -56,7 +56,7 @@ body {
 /* if width or padding are changed, change .PicAndName height as well */
 .PicAndName {
 	width: 250px;
-	height: 275px;
+	height: 100% + 25px;
 	box-shadow: 3px 3px 10px rgba(0,0,0,1); /* h-offset v-offset blur color */
 	padding: 10px; /* space around pic and name */
 	font-family: "Quicksand", sans-serif;
@@ -69,15 +69,15 @@ body {
 /* selects all imgs that are children of PicAndName */
 .PicAndName > img {
 	width: 100%; /* this makes the picture the same width as the parent div, PicAndName */
-	height: 230px; /* = width - 2 * padding */
+	height: 100%; /* = width - 2 * padding */
 }
 
-.OrigamiOverview {
+.FOverview {
 	display:flex;
 	justify-content: space-between;
 	align-items: flex-start;
 }
-.OrigamiSection {
+.FSection {
 	background-color: #D5FAF8;
 	float: left;
 	margin: 20px;
@@ -99,4 +99,28 @@ body {
 	color: white;
 	background-color: #179B92;
 	box-shadow: 3px 3px 10px rgba(0,0,0,0.50);
+}
+
+.rotate90 {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+.rotate180 {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.rotate270 {
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    transform: rotate(270deg);
 }
