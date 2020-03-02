@@ -78,6 +78,7 @@ body {
 	justify-content: space-between;
 	align-items: flex-start;
 }
+
 .FSection {
 	background-color: #D5FAF8;
 	float: left;
@@ -91,6 +92,29 @@ body {
 	align-items: center;
 	flex-grow:1;
 }
+
+/* Style the links inside the navigation bar */
+.SectionTitle a {
+	float: left;
+	color: #f2f2f2;
+	padding: 14px 16px;
+	text-align: center;
+	width: 100%;
+	text-decoration: none;
+}
+
+/* Change the color of links on hover */
+.SectionTitle a:hover {
+	background-color: #46D1C8;
+	color: white;
+}
+/* Add a color to the active/current link */
+.SectionTitle a.active {
+	background-color: #4CAF50;
+	text-align: center;
+	color: white;
+}
+
 
 .SectionTitle {
 	width: 100%;
