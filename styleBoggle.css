@@ -1,0 +1,165 @@
+* {
+	padding: 0;
+	margin: 0;
+	border: 0;
+	outline: 0;
+}
+
+body {
+	background-color: #D5FAF8;
+	background-attachment: fixed;
+	background-size: 100%;
+}
+
+/* Add a SectionTitle background color to the top navigation */
+.topnav {
+	background-color: #179B92; 
+	overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+	float: left;
+	font-family: "Quicksand", sans-serif;
+	color: #f2f2f2;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+	background-color: #D5FAF8;
+	color: black;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+	background-color: #4CAF50;
+	color: white;
+}
+
+.PageTitle {
+	margin: auto;
+	margin-top: 20px;
+	padding: 10px;
+	width: 600px;
+	font-family: "Merienda", cursive;
+	text-align: center;
+	font-size: 3em;
+	color: black;
+}
+
+
+.Description {
+  position: relative;
+  left:50%;
+  transform:translate(-50%,0);
+  font-family: "Quicksand", sans-serif;
+  text-align: left;
+  font-size: 1em;
+  color: black;
+  padding: 30px;
+  max-width: 70%;
+}
+
+/* if width or padding are changed, change .PicAndName height as well */
+.PicAndName {
+	width: 250px;
+	height: 100% + 25px;
+	box-shadow: 3px 3px 10px rgba(0,0,0,1); /* h-offset v-offset blur color */
+	padding: 10px; /* space around pic and name */
+	font-family: "Quicksand", sans-serif;
+	text-align: center;
+	background-color: white;
+	margin: 15px; /* space around each div. 
+				so the space between images will be twice the margin*/
+}
+
+/* selects all imgs that are children of PicAndName */
+.PicAndName > img {
+	width: 100%; /* this makes the picture the same width as the parent div, PicAndName */
+	height: 100%; /* = width - 2 * padding */
+}
+
+.FOverview {
+	flex-wrap: wrap;
+	display:flex;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+
+
+
+
+.FSection {
+	background-color: #D5FAF8;
+	float: left;
+	margin: 20px;
+	box-shadow: 3px 3px 10px rgba(0,0,0,0.50);
+	max-width: 600px;
+	display:flex;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+	flex-direction:column;
+	align-items: center;
+	flex-grow:1;
+}
+
+/* Style the links inside the navigation bar */
+.SectionTitle a {
+	float: left;
+	color: #f2f2f2;
+	padding: 14px 16px;
+	text-align: center;
+	width: 100%;
+	text-decoration: none;
+}
+
+/* Change the color of links on hover */
+.SectionTitle a:hover {
+	background-color: #46D1C8;
+	color: white;
+}
+/* Add a color to the active/current link */
+.SectionTitle a.active {
+	background-color: #4CAF50;
+	text-align: center;
+	color: white;
+}
+
+
+.SectionTitle {
+	width: 100%;
+	text-align: center;
+	font-family: "Merienda", cursive;
+	font-size: 2em;
+	color: white;
+	background-color: #179B92;
+	box-shadow: 3px 3px 10px rgba(0,0,0,0.50);
+}
+
+.rotate90 {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+.rotate180 {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.rotate270 {
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    transform: rotate(270deg);
+}
