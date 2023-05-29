@@ -49,32 +49,12 @@ h4 {
   <h3>Original image (h<span id="h"></span>, w<span id="w"></span>)</h3>
   <canvas id="original"></canvas>
 </div>
-<div>
-  <div class="il">
-    <h4>Grayscaled</h4>
-    <canvas id="grayscale"></canvas>
-  </div>
-  <div class="il">
-    <h4>Edges</h4>
-    <canvas id="edges"></canvas>
-  </div>
-  <div class="il">
-    <h4>Flipped</h4>
-    <canvas id="flipped"></canvas>
-  </div>
-  <div class="il">
-    <h4>Resized</h4>
-    <canvas id="resized"></canvas>
-  </div>
-  <div class="il">
-    <h4>Zoomed</h4>
-    <canvas id="zoomed"></canvas>
-  </div>
-  <div class="il">
+
+<div class="il">
     <h4>Recolored</h4>
     <canvas id="recolored"></canvas>
-  </div>
 </div>
+
 <p >Processing took <span id="duration"></span>ms</p>
 
     <script type="text/javascript">//<![CDATA[
@@ -118,34 +98,9 @@ function loadImage(src) {
         resized = nj.images.resize(img, H / 2, W / 2),
         zoomed = img.slice([img.shape[0] / 4 | 0, 3 * img.shape[0] / 4 | 0],
                            [img.shape[1] / 4 | 0, 3 * img.shape[1] / 4 | 0]),
-        duration = new Date().valueOf() - start
+        
 
     // add calligraphy stuff
-    // img_data = nj.array(img.selection.data)
-    // img_data = img_data.reshape(img.shape[0], img.shape[1], img.shape[2])
-    // console.log("img data shape: ", img_data.shape)
-    // // reshape to W x H x RGBA
-    // var background = document.getElementById('background').value;
-    // var character = document.getElementById('character').value;
-
-
-    // let background_rgb = hex2rgb(background);
-    // let character_rgb = hex2rgb(character);
-    // console.log("bac:", background_rgb)
-    // console.log("char", character_rgb)
-
-    // console.log("img data: ", img_data);
-
-    // div = img_data.divide(-255.0)
-    // sub = img_data.add(1.0)
-    // console.log("sub: ", sub)
-    // range = character_rgb.subtract(background_rgb)
-    // console.log("range: ", range)
-
-    // uncomment to check if math.js is running properly
-    // console.log(math.sqrt(-4).toString()) // 2i
-    
-
     img_data = Array.from(img.selection.data) // RGBA data as 1D js array
 
     // reshape to W x H x RGBA
@@ -154,84 +109,39 @@ function loadImage(src) {
     // get colors (as 1D js arrays)
     let background_rgb = hex2rgb(document.getElementById('background').value);
     let character_rgb = hex2rgb(document.getElementById('character').value);
-   
-    // print to double check correct
-    console.log("bac:", background_rgb)
-    console.log("char", character_rgb)
+  
+    // put each RGBA value between 0 and 1, depending on how close it is to 0 or 255
+    scaled = math.add(math.divide(img_data_shaped, -255.0), 1.0)
 
-    console.log("img data: ", img_data_shaped);
-
-    div = math.divide(img_data_shaped, -255.0)
-    console.log("div: ", div)
-    sub = math.add(div, 1.0)
-    console.log("sub: ", sub)
+    // find range between character and background RGBs
     range = math.subtract(character_rgb, background_rgb)
-    console.log("range: ", range)
-    // broadcasted_range = range.broadcast()
+
+    // create empty object to store recolored info
+    recolored = math.zeros(img.shape)
 
     // can't multiply 3D matrix --> separate into RGBA layers
     shape = math.size(img_data_shaped)
-
-
-    
-    recolored = math.zeros(img.shape)
     for (let i = 0; i < 4; i++) {
-        console.log("i: ", i)
         indices = math.index(math.range(0, shape[0]), math.range(0, shape[1]), i)
-        console.log("indices: ", indices)
-        layer_ = math.subset(sub, indices)
-        
-        layer = math.squeeze(layer_)
-        console.log("layer: ", layer)
-        mult = math.multiply(layer, range[i])
-        console.log("mult: ", mult)
-        shift = math.add(mult, background_rgb[i])
-        console.log("shift: ", shift)
-        recolored = math.subset(recolored, indices, shift)
-        recolored = math.round(recolored)
+
+        // get 2D version of current R, G, B, or A layer
+        layer = math.squeeze(math.subset(scaled, indices))
+
+        // interpolate accordingly between background and character RGB
+        interpolate = math.round(math.add(math.multiply(layer, range[i]), background_rgb[i]))
+
+        // replace in recolored obj
+        recolored = math.subset(recolored, indices, interpolate)
     }
 
-    console.log("done with stuffs")
-    console.log("recolored: ", recolored)
-    flattened = recolored.flat().flat()
-    console.log("flatttt: ", flattened)
+    // convert to proper type for image display
     recolored_int = nj.array(recolored)
-    console.log("recolored int: ", recolored_int)
-
-    console.log("for comparisoin: img", img)
-    console.log("og img type: ", typeof(img))
-    // mult = math.multiply(sub, range)
-    // shift = math.add(mult, background_rgb)
-    // recolored = shift
-    //recolored = (1.0 - img/paper_color)*(character_rgb-background_rgb) + background_rgb
-    
+    duration = new Date().valueOf() - start
     
     // display images in canvas
     var $original = document.getElementById('original');
     $original.width = W; $original.height = H;
     nj.images.save(img, $original);
-
-    var $gray = document.getElementById('grayscale');
-    $gray.width = W; $gray.height = H;
-    nj.images.save(gray, $gray);
-
-    console.log("og size", img.shape)
-    console.log(img);
-    var $edges = document.getElementById('edges');
-    $edges.width = W; $edges.height = H;
-    nj.images.save(scharr, $edges);
-
-    var $flipped = document.getElementById('flipped');
-    $flipped.width = W; $flipped.height = H;
-    nj.images.save(flipped, $flipped);
-
-    var $resized = document.getElementById('resized');
-    $resized.width = resized.shape[1]; $resized.height = resized.shape[0];
-    nj.images.save(resized, $resized);
-
-    var $zoomed = document.getElementById('zoomed');
-    $zoomed.width = W; $zoomed.height  = H;
-    nj.images.save(zoomed, $zoomed);
 
     var $recolored = document.getElementById('recolored');
     $recolored.width = W; $recolored.height  = H;
@@ -246,7 +156,10 @@ function loadImage(src) {
   $image.src = src;
 }
 
+var last_e;
+
 function handleFileSelect(e) {
+  last_e = e
   var file = e.target.files[0];
   var reader = new FileReader();
 
@@ -256,7 +169,15 @@ function handleFileSelect(e) {
   reader.readAsDataURL(file);
 }
 
+function handleInputChange() {
+  if (typeof(last_e) !== 'undefined') {
+    handleFileSelect(last_e)
+  }
+}
+
 document.getElementById('file').addEventListener('change', handleFileSelect, false);
+// document.getElementById('background').addEventListener('change', handleInputChange, false);
+// document.getElementById('character').addEventListener('change', handleInputChange, false);
 
 loadImage('https://upload.wikimedia.org/wikipedia/en/2/24/Lenna.png');
 
