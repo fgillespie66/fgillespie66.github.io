@@ -1,0 +1,281 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>NumJS - Images demo</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.js" integrity="sha512-VW8/i4IZkHxdD8OlqNdF7fGn3ba0+lYqag+Uy4cG6BtJ/LIr8t23s/vls70pQ41UasHH0tL57GQfKDApqc9izA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script
+    type="text/javascript"
+    src="/js/lib/dummy.js"
+    
+  ></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+
+      <script type="text/javascript" src="https://rawgit.com/nicolaspanel/numjs/893016ec40e62eaaa126e1024dbe250aafb3014b/dist/numjs.min.js"></script>
+
+  <style id="compiled-css" type="text/css">
+    .il {
+  display: inline-block;
+}
+h4 {
+  margin-bottom: 5px;
+}
+
+    /* EOS */
+  </style>
+
+  <script id="insert"></script>
+
+</head>
+<body>
+    <h3>Read/manipulate/display images using NumJs</h3>
+
+<input type="file" id="file" name="file">
+
+<div class="colors">
+    <label for="colorpicker">Background Color:</label>
+    <input type="color" id="background" value="#0000ff">
+    <label for="colorpicker">Character Color:</label>
+    <input type="color" id="character" value="#ffffff">
+</div>
+
+<div>
+  <h3>Original image (h<span id="h"></span>, w<span id="w"></span>)</h3>
+  <canvas id="original"></canvas>
+</div>
+<div>
+  <div class="il">
+    <h4>Grayscaled</h4>
+    <canvas id="grayscale"></canvas>
+  </div>
+  <div class="il">
+    <h4>Edges</h4>
+    <canvas id="edges"></canvas>
+  </div>
+  <div class="il">
+    <h4>Flipped</h4>
+    <canvas id="flipped"></canvas>
+  </div>
+  <div class="il">
+    <h4>Resized</h4>
+    <canvas id="resized"></canvas>
+  </div>
+  <div class="il">
+    <h4>Zoomed</h4>
+    <canvas id="zoomed"></canvas>
+  </div>
+  <div class="il">
+    <h4>Recolored</h4>
+    <canvas id="recolored"></canvas>
+  </div>
+</div>
+<p >Processing took <span id="duration"></span>ms</p>
+
+    <script type="text/javascript">//<![CDATA[
+
+
+// NOTE: NumJs is available globally under the name 'nj'
+var size = 150;
+
+const hex2rgb = (hex) => {
+    if(hex.length === 4){
+      return fullHex(hex);
+    }
+  
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    
+    // return {r, g, b} 
+    return [r, g, b, 255.0];
+}
+
+function loadImage(src) {
+  var $image = new Image();
+	$image.crossOrigin = 'Anonymous';
+  $image.onload = function() {
+    var W, H;
+    if ($image.width < $image.height){
+      W = ~~(size * $image.width / $image.height);
+      H = ~~(size);
+    }
+    else{
+      H = ~~(size * $image.height / $image.width);
+      W = ~~(size);
+    }
+    var start = new Date().valueOf();
+    // process images
+    var img = nj.images.read($image),
+    	gray = nj.images.rgb2gray(img),
+        flipped = img.slice(null, [null,null,-1]),
+        scharr = nj.images.scharr(gray), // scharr is a edge detector, like sobel
+        resized = nj.images.resize(img, H / 2, W / 2),
+        zoomed = img.slice([img.shape[0] / 4 | 0, 3 * img.shape[0] / 4 | 0],
+                           [img.shape[1] / 4 | 0, 3 * img.shape[1] / 4 | 0]),
+        duration = new Date().valueOf() - start
+
+    // add calligraphy stuff
+    // img_data = nj.array(img.selection.data)
+    // img_data = img_data.reshape(img.shape[0], img.shape[1], img.shape[2])
+    // console.log("img data shape: ", img_data.shape)
+    // // reshape to W x H x RGBA
+    // var background = document.getElementById('background').value;
+    // var character = document.getElementById('character').value;
+
+
+    // let background_rgb = hex2rgb(background);
+    // let character_rgb = hex2rgb(character);
+    // console.log("bac:", background_rgb)
+    // console.log("char", character_rgb)
+
+    // console.log("img data: ", img_data);
+
+    // div = img_data.divide(-255.0)
+    // sub = img_data.add(1.0)
+    // console.log("sub: ", sub)
+    // range = character_rgb.subtract(background_rgb)
+    // console.log("range: ", range)
+
+    // uncomment to check if math.js is running properly
+    // console.log(math.sqrt(-4).toString()) // 2i
+    
+
+    img_data = Array.from(img.selection.data) // RGBA data as 1D js array
+
+    // reshape to W x H x RGBA
+    img_data_shaped = math.reshape(img_data, img.shape)
+
+    // get colors (as 1D js arrays)
+    let background_rgb = hex2rgb(document.getElementById('background').value);
+    let character_rgb = hex2rgb(document.getElementById('character').value);
+   
+    // print to double check correct
+    console.log("bac:", background_rgb)
+    console.log("char", character_rgb)
+
+    console.log("img data: ", img_data_shaped);
+
+    div = math.divide(img_data_shaped, -255.0)
+    console.log("div: ", div)
+    sub = math.add(div, 1.0)
+    console.log("sub: ", sub)
+    range = math.subtract(character_rgb, background_rgb)
+    console.log("range: ", range)
+    // broadcasted_range = range.broadcast()
+
+    // can't multiply 3D matrix --> separate into RGBA layers
+    shape = math.size(img_data_shaped)
+
+
+    
+    recolored = math.zeros(img.shape)
+    for (let i = 0; i < 4; i++) {
+        console.log("i: ", i)
+        indices = math.index(math.range(0, shape[0]), math.range(0, shape[1]), i)
+        console.log("indices: ", indices)
+        layer_ = math.subset(sub, indices)
+        
+        layer = math.squeeze(layer_)
+        console.log("layer: ", layer)
+        mult = math.multiply(layer, range[i])
+        console.log("mult: ", mult)
+        shift = math.add(mult, background_rgb[i])
+        console.log("shift: ", shift)
+        recolored = math.subset(recolored, indices, shift)
+        recolored = math.round(recolored)
+    }
+
+    console.log("done with stuffs")
+    console.log("recolored: ", recolored)
+    flattened = recolored.flat().flat()
+    console.log("flatttt: ", flattened)
+    recolored_int = nj.array(recolored)
+    console.log("recolored int: ", recolored_int)
+
+    console.log("for comparisoin: img", img)
+    console.log("og img type: ", typeof(img))
+    // mult = math.multiply(sub, range)
+    // shift = math.add(mult, background_rgb)
+    // recolored = shift
+    //recolored = (1.0 - img/paper_color)*(character_rgb-background_rgb) + background_rgb
+    
+    
+    // display images in canvas
+    var $original = document.getElementById('original');
+    $original.width = W; $original.height = H;
+    nj.images.save(img, $original);
+
+    var $gray = document.getElementById('grayscale');
+    $gray.width = W; $gray.height = H;
+    nj.images.save(gray, $gray);
+
+    console.log("og size", img.shape)
+    console.log(img);
+    var $edges = document.getElementById('edges');
+    $edges.width = W; $edges.height = H;
+    nj.images.save(scharr, $edges);
+
+    var $flipped = document.getElementById('flipped');
+    $flipped.width = W; $flipped.height = H;
+    nj.images.save(flipped, $flipped);
+
+    var $resized = document.getElementById('resized');
+    $resized.width = resized.shape[1]; $resized.height = resized.shape[0];
+    nj.images.save(resized, $resized);
+
+    var $zoomed = document.getElementById('zoomed');
+    $zoomed.width = W; $zoomed.height  = H;
+    nj.images.save(zoomed, $zoomed);
+
+    var $recolored = document.getElementById('recolored');
+    $recolored.width = W; $recolored.height  = H;
+    nj.images.save(recolored_int, $recolored);
+    
+    document.getElementById('duration').textContent =''+duration;
+    document.getElementById('h').textContent =''+img.shape[0];
+    document.getElementById('w').textContent =''+img.shape[1];
+    
+  };
+
+  $image.src = src;
+}
+
+function handleFileSelect(e) {
+  var file = e.target.files[0];
+  var reader = new FileReader();
+
+  reader.onload = function(e) {
+    loadImage(e.target.result);
+  };
+  reader.readAsDataURL(file);
+}
+
+document.getElementById('file').addEventListener('change', handleFileSelect, false);
+
+loadImage('https://upload.wikimedia.org/wikipedia/en/2/24/Lenna.png');
+
+
+  //]]></script>
+
+  <script>
+    // tell the embed parent frame the height of the content
+    if (window.parent && window.parent.parent){
+      window.parent.parent.postMessage(["resultsFrame", {
+        height: document.body.getBoundingClientRect().height,
+        slug: "ysdzg189"
+      }], "*")
+    }
+
+    // always overwrite window.name, in case users try to set it manually
+    window.name = "result"
+  </script>
+
+
+</body>
+</html>

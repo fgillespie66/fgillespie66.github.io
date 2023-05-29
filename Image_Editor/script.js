@@ -4,13 +4,18 @@ filterName = document.querySelector(".filter-info .name"),
 filterValue = document.querySelector(".filter-info .value"),
 filterSlider = document.querySelector(".slider input"),
 rotateOptions = document.querySelectorAll(".rotate button"),
-previewImg = document.querySelector(".preview-img img"),
+calligraphyOptions = document.querySelectorAll(".calligraphy button"),
+calligraphyColors = document.querySelectorAll(".calligraphy input"),
 resetFilterBtn = document.querySelector(".reset-filter"),
 chooseImgBtn = document.querySelector(".choose-img"),
 saveImgBtn = document.querySelector(".save-img");
 
+var previewImg = document.querySelector(".preview-img img");
+
 let brightness = "100", saturation = "100", inversion = "0", grayscale = "0";
 let rotate = 0, flipHorizontal = 1, flipVertical = 1;
+
+let background = "#0000ff", character = "#ffffff"
 
 const loadImage = () => {
     let file = fileInput.files[0];
@@ -83,6 +88,48 @@ rotateOptions.forEach(option => {
         applyFilter();
     });
 });
+
+
+calligraphyColors.forEach(color => {
+    color.addEventListener("input", () => {
+        if(color.id === "background") {
+            background = color.value
+        } else if(color.id === "character") {
+            character = color.value
+        }
+    });
+});
+
+calligraphyOptions.forEach(option => {
+    option.addEventListener("click", () => {
+        document.querySelector(".active").classList.remove("active");
+        option.classList.add("active");
+
+        if(option.id === "recolor") {
+            // process images
+
+            var image = new Image();
+            image.src = previewImg.src
+
+            var img = nj.images.read(image),
+                gray = nj.images.rgb2gray(img),
+                scharr = nj.images.scharr(gray); // scharr is a edge detector, like sobel
+
+            previewImg = scharr;
+
+
+            
+
+
+            
+        
+        }
+
+    });
+});
+
+
+
 
 const resetFilter = () => {
     brightness = "100"; saturation = "100"; inversion = "0"; grayscale = "0";

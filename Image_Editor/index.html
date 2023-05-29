@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
+    <script src="https://cdn.jsdelivr.net/gh/nicolaspanel/numjs@0.15.1/dist/numjs.min.js"></script>
   </head>
   <body>
     <div class="container disable">
@@ -37,6 +38,18 @@
                         <button id="right"><i class="fa-solid fa-rotate-right"></i></button>
                         <button id="horizontal"><i class='bx bx-reflect-vertical'></i></button>
                         <button id="vertical"><i class='bx bx-reflect-horizontal' ></i></button>
+                    </div>
+                </div>
+                <div class="calligraphy">
+                    <label class="title">Recolor Calligraphy</label>
+                    <div class="options">
+                        <button id="recolor">Recolor</button>
+                    </div> 
+                    <div class="colors">
+                        <label for="colorpicker">Background Color:</label>
+                        <input type="color" id="background" value="#0000ff">
+                        <label for="colorpicker">Character Color:</label>
+                        <input type="color" id="character" value="#ffffff">
                     </div>
                 </div>
             </div>
