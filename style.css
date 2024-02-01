@@ -1,26 +1,49 @@
+:root {
+	--teal:  #179B92;
+	--light-teal:  #D5FAF8;
+	--light-gray:  #dbdbdb;
+}
+
 * {
 	padding: 0;
 	margin: 0;
 	border: 0;
 	outline: 0;
+	box-sizing: border-box;
+}
+
+p {
+	margin: 20px 0px;
+}
+
+img {
+	border-radius: 10px;
+	max-width: 100%;
+	width: 640;
 }
 
 body {
-	background-image: url("Images/golden-pavilion.jpg");
+	background-color: #ffffff; 
+	/* background-image: url("Images/golden-pavilion.jpg"); */
 	background-attachment: fixed;
 	background-size: 100%;
+	font-family: "Quicksand", sans-serif;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
 }
 
 /* Add a SectionTitle background color to the top navigation */
 .topnav {
-	background-color: #179B92; 
-	overflow: hidden;
+	background-color: var(--teal); 
+	padding: 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 /* Style the links inside the navigation bar */
 .topnav a {
-	float: left;
-	font-family: "Quicksand", sans-serif;
 	color: #f2f2f2;
 	text-align: center;
 	padding: 14px 16px;
@@ -40,91 +63,183 @@ body {
 	color: white;
 }
 
+.Page{
+	max-width: 800px;
+	padding-left: 100px;
+	padding-right: 100px;
+	margin: 0 auto;
+	padding: 0 20px;
+	box-sizing: border-box;
+}
+
+/* Responsive styles for smaller screens */
+@media screen and (max-width: 800px) {
+	.Page {
+	  padding: 20px;
+	  font-size: 14px;
+	}
+  }
+
+
 .PageTitle {
-	margin: auto;
-	margin-top: 20px;
-	padding: 10px;
-	width: 600px;
-	font-family: "Merienda", cursive;
-	text-align: center;
-	font-size: 4em;
-	color: white;
-	background-color: #46D1C8;
-	box-shadow: 3px 3px 10px rgba(0,0,0,0.50);
+	margin-top: 50px;
+	margin-bottom: 20px;
+	width: 400px;
+	font-family: "Quicksand", cursive;
+	text-align: left;
+	font-size: 2em;
+	color: var(--teal);
+	font-weight: bold;
+	/* box-shadow: 3px 3px 10px rgba(0,0,0,0.50); */
+	/* border-radius: 10px; */
+}
+
+.intro {
+	display: flex;
+	padding: 50px 100px;
+}
+
+.footer-head {
+	display: flex;
+	padding-bottom: 20px;
+	align-items: center;
+}
+
+.footer {
+	background-color: var(--light-gray);
+	margin-top: auto; /* footer at the bottom */
+	padding: 50px;
+	margin-bottom: 50px;
+}
+
+.headshot {
+	width: 150px;
+	height: 150px;
+	overflow: hidden;
+	border-radius: 50%;
+}
+
+.headshot img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: 50%;
 }
 
 /* if width or padding are changed, change .PicAndName height as well */
 .PicAndName {
-	width: 250px;
-	height: 100% + 25px;
-	box-shadow: 3px 3px 10px rgba(0,0,0,1); /* h-offset v-offset blur color */
-	padding: 10px; /* space around pic and name */
+	width: auto;
+	height: 200px;
+	/* box-shadow: 3px 3px 10px rgba(0,0,0,1); h-offset v-offset blur color */
+	/* padding: 10px; space around pic and name */
 	font-family: "Quicksand", sans-serif;
 	text-align: center;
-	background-color: white;
+	/* background-color: white; */
 	margin: 15px; /* space around each div. 
 				so the space between images will be twice the margin*/
+	position: relative;
 }
 
 /* selects all imgs that are children of PicAndName */
 .PicAndName > img {
 	width: 100%; /* this makes the picture the same width as the parent div, PicAndName */
 	height: 100%; /* = width - 2 * padding */
+	border-radius: 5%
 }
+
+.date-box {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	background-color: white;
+	color: rgb(45, 45, 45);
+	padding: 5px 10px;
+	font-size: 12px;
+	border-radius: 5px;
+	overflow: hidden;
+  }
 
 .FOverview {
 	flex-wrap: wrap;
 	display:flex;
 	justify-content: space-between;
 	align-items: flex-start;
+	padding-left: 100px;
+	padding-right: 100px;
+	max-width: 1500px;
+	margin: 0 auto;
 }
 
+/* Media query for screens with a maximum width of 600px */
+@media screen and (max-width: 600px) {
+	.FOverview {
+	  padding-left: 10px;  /* Adjust padding for narrower screens */
+	  padding-right: 10px;
+	}
+  }
+
 .FSection {
-	background-color: #D5FAF8;
+	background-color: var(--light-teal);
 	float: left;
 	margin: 20px;
 	box-shadow: 3px 3px 10px rgba(0,0,0,0.50);
-	max-width: 600px;
+	max-width: 300px;
 	display:flex;
 	justify-content: flex-start;
 	flex-wrap: wrap;
 	flex-direction:column;
 	align-items: center;
 	flex-grow:1;
+	border-radius: 5%;
+	overflow: hidden;
+	box-sizing: border-box;
 }
 
 /* Style the links inside the navigation bar */
 .SectionTitle a {
+	display: block;
 	float: left;
-	color: #f2f2f2;
-	padding: 14px 16px;
-	text-align: center;
 	width: 100%;
+	color: #f2f2f2;
+	padding: 15px;
+	text-align: center;
 	text-decoration: none;
+	transition: all 0.3s ease;
 }
 
 /* Change the color of links on hover */
 .SectionTitle a:hover {
 	background-color: #46D1C8;
 	color: white;
+	white-space: normal;
+	word-wrap: break-word;
 }
 /* Add a color to the active/current link */
 .SectionTitle a.active {
 	background-color: #4CAF50;
 	text-align: center;
 	color: white;
+	margin: 20px;
 }
 
 
 .SectionTitle {
 	width: 100%;
 	text-align: center;
-	font-family: "Merienda", cursive;
-	font-size: 2em;
+	font-family: "Quicksand", cursive;
+	font-size: 1em;
 	color: white;
 	background-color: #179B92;
 	box-shadow: 3px 3px 10px rgba(0,0,0,0.50);
+	
 }
+
+
+.subtitle {
+	color: rgb(45, 45, 45);
+	margin: 20px;
+}
+
 
 .rotate90 {
     -webkit-transform: rotate(90deg);
@@ -148,4 +263,12 @@ body {
     -o-transform: rotate(270deg);
     -ms-transform: rotate(270deg);
     transform: rotate(270deg);
+}
+
+.left-links {
+	margin-right: auto;
+}
+  
+.right-links {
+	margin-left: auto;
 }

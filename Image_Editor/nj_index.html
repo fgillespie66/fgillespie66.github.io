@@ -101,41 +101,40 @@ function loadImage(src) {
         
 
     // add calligraphy stuff
-    img_data = Array.from(img.selection.data) // RGBA data as 1D js array
+    img_data = nj.array(img.selection.data) // RGBA data as 1D js array
 
     // reshape to W x H x RGBA
-    img_data_shaped = math.reshape(img_data, img.shape)
+    img_data_shaped = nj.reshape(img_data, img.shape)
 
     // get colors (as 1D js arrays)
-    let background_rgb = hex2rgb(document.getElementById('background').value);
-    let character_rgb = hex2rgb(document.getElementById('character').value);
+    let background_rgb = nj.array(hex2rgb(document.getElementById('background').value));
+    let character_rgb = nj.array(hex2rgb(document.getElementById('character').value));
   
     // put each RGBA value between 0 and 1, depending on how close it is to 0 or 255
-    scaled = math.add(math.divide(img_data_shaped, -255.0), 1.0)
+    scaled = nj.add(nj.divide(img_data_shaped, -255.0), 1.0)
 
     // find range between character and background RGBs
-    range = math.subtract(character_rgb, background_rgb)
+    range = nj.subtract(character_rgb, background_rgb)
 
     // create empty object to store recolored info
-    recolored = math.zeros(img.shape)
+    recolored = nj.zeros(img.shape)
 
     // can't multiply 3D matrix --> separate into RGBA layers
-    shape = math.size(img_data_shaped)
+    shape = img_data_shaped.shape
     for (let i = 0; i < 4; i++) {
-        indices = math.index(math.range(0, shape[0]), math.range(0, shape[1]), i)
 
         // get 2D version of current R, G, B, or A layer
-        layer = math.squeeze(math.subset(scaled, indices))
+        layer = scaled.slice([null, null, i])
+        console.log(layer)
 
         // interpolate accordingly between background and character RGB
-        interpolate = math.round(math.add(math.multiply(layer, range[i]), background_rgb[i]))
+        interpolate = nj.round(nj.add(nj.multiply(layer, range[i]), background_rgb[i]))
 
         // replace in recolored obj
-        recolored = math.subset(recolored, indices, interpolate)
+        recolored = nj.subset(recolored, indices, interpolate)
     }
 
     // convert to proper type for image display
-    recolored_int = nj.array(recolored)
     duration = new Date().valueOf() - start
     
     // display images in canvas

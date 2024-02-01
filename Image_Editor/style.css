@@ -179,3 +179,13 @@ body{
     margin-left: 0px;
   }
 }
+
+.topnav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.right-links {
+  display: flex;
+  margin-left: auto;
+}
