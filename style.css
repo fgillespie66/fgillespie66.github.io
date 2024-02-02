@@ -2,6 +2,7 @@
 	--teal:  #179B92;
 	--light-teal:  #D5FAF8;
 	--light-gray:  #dbdbdb;
+	--base-font-size: 1em;
 }	
 
 * {
@@ -11,14 +12,14 @@
 	outline: 0;
 	box-sizing: border-box;
 	font-weight: bolder;
+	font-size: var(--base-font-size);
 }
 
 /* Responsive styles for smaller screens */
 @media screen and (max-width: 500px) {
-	* {
-		font-size: 20px;
-
-	}
+	:root {
+		--base-font-size:1.25em; /* Adjust the base font size for smaller screens */
+	  }
 	
 	.Page {
 	  padding: 20px;
@@ -68,7 +69,7 @@ body {
 .topnav a {
 	color: #f2f2f2;
 	text-align: center;
-	padding: 14px 16px;
+	/* padding: 14px 16px; */
 	text-decoration: none;
 }
 
