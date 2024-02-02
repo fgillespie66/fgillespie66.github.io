@@ -2,7 +2,9 @@
 	--teal:  #179B92;
 	--light-teal:  #D5FAF8;
 	--light-gray:  #dbdbdb;
-}
+	--base-font-size: 12px;
+	--nav-font-size: 14px;
+}	
 
 * {
 	padding: 0;
@@ -11,6 +13,30 @@
 	outline: 0;
 	box-sizing: border-box;
 }
+
+/* Responsive styles for smaller screens */
+@media screen and (max-width: 500px) {
+	:root {
+		--base-font-size: 14px;
+		--nav-font-size: 16px;
+	}
+	* {
+		font-size: var(--base-font-size);
+	}
+	
+	.Page {
+	  padding: 20px;
+	}
+
+	.FOverview {
+	  padding-left: 10px;  /* Adjust padding for narrower screens */
+	  padding-right: 10px;
+	}
+
+
+  
+}
+
 
 p {
 	margin: 20px 0px;
@@ -48,7 +74,7 @@ body {
 	text-align: center;
 	padding: 14px 16px;
 	text-decoration: none;
-	font-size: 17px;
+	font-size: var(--nav-font-size);
 }
 
 /* Change the color of links on hover */
@@ -72,13 +98,6 @@ body {
 	box-sizing: border-box;
 }
 
-/* Responsive styles for smaller screens */
-@media screen and (max-width: 800px) {
-	.Page {
-	  padding: 20px;
-	  font-size: 14px;
-	}
-  }
 
 
 .PageTitle {
@@ -96,8 +115,14 @@ body {
 
 .intro {
 	display: flex;
+	flex-wrap: wrap;
 	padding: 50px 100px;
+	max-width: 800px;
+	align-items: center;
+	margin: 0 auto; /* center the container */
 }
+
+
 
 .footer-head {
 	display: flex;
@@ -170,13 +195,7 @@ body {
 	margin: 0 auto;
 }
 
-/* Media query for screens with a maximum width of 600px */
-@media screen and (max-width: 600px) {
-	.FOverview {
-	  padding-left: 10px;  /* Adjust padding for narrower screens */
-	  padding-right: 10px;
-	}
-  }
+
 
 .FSection {
 	background-color: var(--light-teal);
