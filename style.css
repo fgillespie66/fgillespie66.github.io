@@ -15,24 +15,6 @@
 	font-size: var(--base-font-size);
 }
 
-/* Responsive styles for smaller screens */
-@media screen and (max-width: 500px) {
-	:root {
-		--base-font-size:1.25em; /* Adjust the base font size for smaller screens */
-	  }
-	
-	.Page {
-	  padding: 20px;
-	}
-
-	.FOverview {
-	  padding-left: 10px;  /* Adjust padding for narrower screens */
-	  padding-right: 10px;
-	}
-
-
-  
-}
 
 
 p {
@@ -139,6 +121,7 @@ body {
 	height: 150px;
 	overflow: hidden;
 	border-radius: 50%;
+	margin-right: 10px;
 }
 
 .headshot img {
@@ -309,4 +292,27 @@ body {
   
 .right-links {
 	margin-left: auto;
+}
+
+/* Responsive styles for smaller screens */
+@media screen and (max-width: 500px) {
+	/* :root {
+		/* --base-font-size:1.25em; Adjust the base font size for smaller screens */
+	  /* } */ 
+	
+	.PageTitle {
+	  font-size: 1em;
+	}
+
+	.FOverview {
+	  padding-left: 20px;  /* Adjust padding for narrower screens */
+	  padding-right: 20px;
+	}
+
+	.intro {
+		padding: 20px;
+	}
+
+
+  
 }
