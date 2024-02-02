@@ -2,8 +2,6 @@
 	--teal:  #179B92;
 	--light-teal:  #D5FAF8;
 	--light-gray:  #dbdbdb;
-	--base-font-size: 12px;
-	--nav-font-size: 14px;
 }	
 
 * {
@@ -12,16 +10,14 @@
 	border: 0;
 	outline: 0;
 	box-sizing: border-box;
+	font-weight: bolder;
 }
 
 /* Responsive styles for smaller screens */
 @media screen and (max-width: 500px) {
-	:root {
-		--base-font-size: 14px;
-		--nav-font-size: 16px;
-	}
 	* {
-		font-size: var(--base-font-size);
+		font-size: 20px;
+
 	}
 	
 	.Page {
@@ -74,7 +70,6 @@ body {
 	text-align: center;
 	padding: 14px 16px;
 	text-decoration: none;
-	font-size: var(--nav-font-size);
 }
 
 /* Change the color of links on hover */
@@ -90,7 +85,7 @@ body {
 }
 
 .Page{
-	max-width: 800px;
+	max-width: 1000px;
 	padding-left: 100px;
 	padding-right: 100px;
 	margin: 0 auto;
@@ -103,7 +98,6 @@ body {
 .PageTitle {
 	margin-top: 50px;
 	margin-bottom: 20px;
-	width: 400px;
 	font-family: "Quicksand", cursive;
 	text-align: left;
 	font-size: 2em;
@@ -122,7 +116,9 @@ body {
 	margin: 0 auto; /* center the container */
 }
 
-
+.intro-text {
+	margin: 10px 0px;
+}
 
 .footer-head {
 	display: flex;
@@ -174,12 +170,11 @@ body {
 
 .date-box {
 	position: absolute;
-	top: 10px;
-	left: 10px;
+	top: 5px;
+	right: 5px;
 	background-color: white;
 	color: rgb(45, 45, 45);
 	padding: 5px 10px;
-	font-size: 12px;
 	border-radius: 5px;
 	overflow: hidden;
   }
@@ -187,22 +182,19 @@ body {
 .FOverview {
 	flex-wrap: wrap;
 	display:flex;
-	justify-content: space-between;
+	justify-content: center;
 	align-items: flex-start;
-	padding-left: 100px;
-	padding-right: 100px;
-	max-width: 1500px;
+	padding-left: 10px;
+	padding-right: 10px;
 	margin: 0 auto;
 }
 
-
-
-.FSection {
+.FSectionSquare {
 	background-color: var(--light-teal);
 	float: left;
 	margin: 20px;
 	box-shadow: 3px 3px 10px rgba(0,0,0,0.50);
-	max-width: 300px;
+	max-width: 250px;
 	display:flex;
 	justify-content: flex-start;
 	flex-wrap: wrap;
@@ -212,6 +204,31 @@ body {
 	border-radius: 5%;
 	overflow: hidden;
 	box-sizing: border-box;
+	text-decoration: none;
+}
+
+
+.FSection {
+	background-color: var(--light-teal);
+	float: left;
+	margin: 20px;
+	box-shadow: 3px 3px 10px rgba(0,0,0,0.50);
+	max-width: 400px;
+	display:flex;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+	flex-direction:column;
+	align-items: center;
+	flex-grow:1;
+	border-radius: 5%;
+	overflow: hidden;
+	box-sizing: border-box;
+	text-decoration: none;
+}
+
+.FSection:hover {
+	background-color:  #46D1C8;
+	box-shadow: 3px 3px 20px rgba(0,0,0,0.50);
 }
 
 /* Style the links inside the navigation bar */
@@ -238,7 +255,7 @@ body {
 	background-color: #4CAF50;
 	text-align: center;
 	color: white;
-	margin: 20px;
+	margin: 10px;
 }
 
 
@@ -246,17 +263,18 @@ body {
 	width: 100%;
 	text-align: center;
 	font-family: "Quicksand", cursive;
-	font-size: 1em;
 	color: white;
 	background-color: #179B92;
 	box-shadow: 3px 3px 10px rgba(0,0,0,0.50);
-	
+	text-decoration: none;
+	padding: 20px;
 }
 
 
 .subtitle {
 	color: rgb(45, 45, 45);
 	margin: 20px;
+	text-decoration: none;
 }
 
 
