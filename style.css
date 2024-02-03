@@ -294,8 +294,20 @@ body {
 	margin-left: auto;
 }
 
+.right-links > a {
+	margin-left: 20px;
+}
+
+.video-landscape {
+	width: 640px;
+}
+
+.video-portrait {
+	width: 360px;
+}
+
 /* Responsive styles for smaller screens */
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 640px) {
 	/* :root {
 		/* --base-font-size:1.25em; Adjust the base font size for smaller screens */
 	  /* } */ 
@@ -311,6 +323,18 @@ body {
 
 	.intro {
 		padding: 20px;
+	}
+
+	.video-portrait {
+		max-width: 90%;
+	}
+
+	.video-landscape {
+		max-width: 100%;
+	}
+
+	.Page {
+		max-width: 100%;
 	}
 
 
