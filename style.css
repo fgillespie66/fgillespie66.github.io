@@ -19,6 +19,7 @@
 
 p {
 	margin: 20px 0px;
+	font-weight:normal;
 }
 
 img {
@@ -29,7 +30,7 @@ img {
 
 body {
 	background-color: #ffffff; 
-	/* background-image: url("Images/golden-pavilion.jpg"); */
+	/* background-image: url("Media/golden-pavilion.jpg"); */
 	background-attachment: fixed;
 	background-size: 100%;
 	font-family: "Quicksand", sans-serif;
@@ -304,6 +305,10 @@ body {
 
 .video-portrait {
 	width: 360px;
+}
+
+.section-margin {
+	margin:50px 0px;
 }
 
 /* Responsive styles for smaller screens */

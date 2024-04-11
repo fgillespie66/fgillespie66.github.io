@@ -3,7 +3,7 @@
 <html>
 	<head>
 		<title>
-			Robotics: Science and Systems
+			Fiona Gillespie
 		</title>
 		<link rel="stylesheet" href="style.css"/>
 		<link href="https://fonts.googleapis.com/css?family=Merienda|Quicksand" rel="stylesheet">
@@ -32,58 +32,75 @@
                 I took this course in Spring 2023, and it was a great experience for learning ROS for use on real hardware. I worked on a team with 3 other MIT students. We used a mini racecar, equipped with a ZED camera and LiDAR. 
             </p>
 
-            <img src="Images\Projects\RSS\team16.jpg" style="width: 640px"> 
+            <img src="Media\Projects\RSS\team16.jpg" style="width: 640px"> 
 
             <p>
                Check out demos of our racecar in action!
             </p>
 
-
-            <h2>Wall Following</h2>
-            <video class="video-landscape" height="360" controls>
-                <source src="Images/Projects/RSS/wall_following.mp4" type="video/mp4">
-           
-                Your browser does not support the video tag.
-              </video>
-
-
-            <h2>Parking</h2>
-            <video class="video-landscape" height="360" controls>
-                <source src="Images/Projects/RSS/parking_mini.mp4" type="video/mp4">
-           
-                Your browser does not support the video tag.
-            </video>
-
-            <h2>Path Planning and Pure Pursuit</h2>
-            <video class="video-landscape" height="360" controls>
-                <source src="Images/Projects/RSS/path_planning_pure_pursuit_sim.mov" type="video/mp4">
-           
-                Your browser does not support the video tag.
-            </video>
-
-            <h2>Final Challenge</h2>
-            <h3>Racing around an indoor track</h3>
-            <video class="video-portrait" controls>
-                <source src="Images/Projects/RSS/final_race.mov" type="video/mp4">
-           
-                Your browser does not support the video tag.
-            </video>
-
-            <h3>Driving through a mini city</h3>
-            <div style="display: flex; flex-wrap: wrap">
-                <video class="video-landscape" height="360" controls style="margin-right: 10px">
-                    <source src="Images/Projects/RSS/city_driving.mp4" type="video/mp4">
-               
+            <div class="section-margin">
+                <h2>Wall Following</h2>
+                <p>We use the LiDAR to scan the surroundings and determine how far away obstacles are. We divide the scan into three sections: left, right, and center. Based on these sections, we use a linear regression to estimate where the wall to the side is, and where any obstacle in front might be.</p>
+                <video class="video-landscape" height="360" controls>
+                    <source src="Media/Projects/RSS/wall_following.mp4" type="video/mp4">
+            
                     Your browser does not support the video tag.
                 </video>
-                <video class="video-portrait" controls>
-                    <source src="Images/Projects/RSS/city_driving_car_pov.MOV" type="video/mp4">
-               
-                    Your browser does not support the video tag.
-                </video>
-    
             </div>
-          
+            
+            <div class="section-margin">
+                <h2>Parking</h2>
+                <p>We use color segmentation to locate the orange pixels in the image to detect the cone. Once the cone is located, our controller determines the motor commands so that we can successfully park at the desired distance from the cone.</p>
+                <video class="video-landscape" height="360" controls>
+                    <source src="Media/Projects/RSS/parking_mini.mp4" type="video/mp4">
+            
+                    Your browser does not support the video tag.
+                </video>
+            </div> 
+
+            <div class="section-margin">
+                <h2>Path Planning and Pure Pursuit</h2>
+                <p>Given a prior map, we plan the best path to get from the start point to the end point using A*. We then using the pure pursuit control algorithm to enable our racecar to follow this path.</p>
+                <video class="video-landscape" height="360" controls>
+                    <source src="Media/Projects/RSS/path_planning_pure_pursuit_sim.mov" type="video/mp4">
+            
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <div class="section-margin">
+                <h2>Final Challenge</h2>
+                <h3>Racing around an indoor track at 2m/s!</h3>
+                <p>We detect the white track lanes using color segmentation. We then find the midpoint between the lanes, and project that point closer to the car for a faster reaction time.</p>
+
+                <video class="video-portrait" controls>
+                    <source src="Media/Projects/RSS/final_race.mov" type="video/mp4">
+            
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <div class="section-margin">
+                <h3>Driving through a mini city</h3>
+                <p>We similarly detect the orange tape aka road via color segmentation. We also have a corner detector to ensure we can safely make tight turns within the city.</p>
+                <div style="display: flex; flex-wrap: wrap">
+                    <video class="video-landscape" height="360" controls style="margin-right: 10px">
+                        <source src="Media/Projects/RSS/city_driving.mp4" type="video/mp4">
+                
+                        Your browser does not support the video tag.
+                    </video>
+                    <video class="video-portrait" controls>
+                        <source src="Media/Projects/RSS/city_driving_car_pov.MOV" type="video/mp4">
+                
+                        Your browser does not support the video tag.
+                    </video>
+        
+                </div>
+
+            <div class="section-margin">
+
+
+
             <h1>Slides</h1>
             <iframe src="https://docs.google.com/presentation/d/1KTtB2gtiDwbI31DtCFx5aWFpJoG8UlOE_JuG3OKA7GE/embed?start=false&loop=false&delayms=3000" frameborder="0" width="100%" height="600" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
             
@@ -92,7 +109,7 @@
         <footer class="footer">
             <div class="footer-head">
                 <div class="headshot">
-                    <img src="Images/fiona-headshot-square.jpg">
+                    <img src="Media/fiona-headshot-square.jpg">
                 </div>
                 <div class="PageTitle" style="font-size: 2em; margin-left: 20px">
                     Fiona Gillespie
